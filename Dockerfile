@@ -1,12 +1,7 @@
-FROM node:14
-
-WORKDIR /usr/src/app
-
-COPY package.json./
-
-RUN npm install
-
-COPY . .
-
-EXPOSE 3000
-CMD [ "node", "index.html" ]
+FROM ubuntu
+RUN apt-get update
+RUN DEBIAN_FRONTEND="noninteractive" apt-get -y install tzdata
+RUN apt-get -y install apache2
+ADD . /var/www/html
+ENTRYPOINT apachectl -D FOREGROUND
+ENV name Devops intellipaat
